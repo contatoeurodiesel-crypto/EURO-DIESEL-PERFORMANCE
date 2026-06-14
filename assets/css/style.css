@@ -1,0 +1,14 @@
+/* RESET E PADRÃO */
+* { text-transform: uppercase; margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+body { background-color: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; }
+
+/* LOGO ESTILIZADO */
+.logo { font-size: 40px; font-weight: bold; margin-bottom: 20px; }
+.e-risco { display: block; width: 20px; height: 5px; background-color: #fff; margin-bottom: -2px; }
+.letra-e { color: #FF0000; }
+.outras-letras { color: #fff; }
+
+/* INPUTS E BOTÕES */
+input { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid #FF0000; color: #fff; }
+button { width: 100%; padding: 12px; background: #FF0000; border: none; color: white; font-weight: bold; cursor: pointer; }
+a { color: #888; font-size: 12px; display: block; margin-top: 10px; text-decoration: none; }
