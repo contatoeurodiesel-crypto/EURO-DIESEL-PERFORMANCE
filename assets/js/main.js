@@ -104,12 +104,16 @@ async function carregarPendentes() {
     lista.innerHTML = ''; // Limpa a lista
 
     data.forEach(user => {
+        // CORREÇÃO: Agora passamos os 3 parâmetros que a função aprovar precisa
         lista.innerHTML += `
-            <div style="border: 1px solid #E7272D; padding: 10px; margin: 10px 0;">
+            <div style="border: 1px solid #E7272D; padding: 10px; margin: 10px 0; color: #fff;">
                 <p>NOME: ${user.nome}</p>
                 <p>TELEFONE: ${user.telefone}</p>
                 <p>TOKEN: ${user.token}</p>
-                <button onclick="aprovar('${user.id}')">APROVAR</button>
+                <button onclick="aprovar('${user.id}', '${user.nome}', '${user.telefone}')" 
+                        style="background: #E7272D; color: #fff; border: none; padding: 10px; cursor: pointer;">
+                    APROVAR E ENVIAR CÓDIGO
+                </button>
             </div>
         `;
     });
