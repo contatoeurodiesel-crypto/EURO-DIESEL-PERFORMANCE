@@ -57,26 +57,26 @@ async function cadastrarComToken() {
     let pass = document.getElementById('pass').value.trim();
     let ddi = document.getElementById('ddi').value;
     let tel = document.getElementById('telefone').value;
-    
-    // ... (restante da validação inicial)
 
-    let token = `${gerarParte()}-${gerarParte()}-${gerarParte()}`; // O token do cadastro
+    let dadosParaInserir = { 
+        nome: nome, 
+        usuario: user, 
+        senha: pass, 
+        telefone: ddi + tel, 
+        token: `${gerarParte()}-${gerarParte()}-${gerarParte()}`, 
+        status: 'PENDENTE' 
+    };
+
+    console.log("Tentando inserir:", dadosParaInserir); // VEJA ISSO NO CONSOLE DO NAVEGADOR
 
     try {
-        const { error } = await _supabase.from('usuarios').insert([{ 
-            nome, usuario: user, senha: pass, telefone: ddi + tel, token: token, status: 'PENDENTE' 
-        }]);
+        const { error } = await _supabase.from('usuarios').insert([dadosParaInserir]);
 
         if (error) {
+            console.error("Detalhes do erro do Supabase:", error); // VEJA ISSO TAMBÉM
             alert("Erro ao cadastrar: " + error.message);
         } else {
-            // Mensagem que o usuário envia para VOCÊ
-            let mensagem = `*SOLICITAÇÃO DE ACESSO*%0A%0ANome: ${nome}%0AUsuário: ${user}%0AToken gerado: ${token}%0A%0APor favor, ative meu cadastro!`;
-            let linkWhatsApp = `https://wa.me/5569981128233?text=${encodeURIComponent(mensagem)}`;
-
-            alert("CADASTRO REALIZADO! Seu token: " + token + "\n\nVocê será redirecionado para enviar este token ao Administrador.");
-            window.open(linkWhatsApp, '_blank');
-            window.location.href = "index.html";
+            // ... (restante do sucesso)
         }
     } catch (e) {
         alert("Erro inesperado: " + e.message);
