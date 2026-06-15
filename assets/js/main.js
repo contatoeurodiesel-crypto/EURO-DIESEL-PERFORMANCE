@@ -58,6 +58,11 @@ async function cadastrarComToken() {
     let ddi = document.getElementById('ddi').value;
     let tel = document.getElementById('telefone').value;
 
+    if (!nome || !user || !pass || !tel) {
+        alert("POR FAVOR, PREENCHA TODOS OS CAMPOS!");
+        return;
+    }
+
     let dadosParaInserir = { 
         nome: nome, 
         usuario: user, 
@@ -67,16 +72,19 @@ async function cadastrarComToken() {
         status: 'PENDENTE' 
     };
 
-    console.log("Tentando inserir:", dadosParaInserir); // VEJA ISSO NO CONSOLE DO NAVEGADOR
-
     try {
         const { error } = await _supabase.from('usuarios').insert([dadosParaInserir]);
 
         if (error) {
-            console.error("Detalhes do erro do Supabase:", error); // VEJA ISSO TAMBÉM
             alert("Erro ao cadastrar: " + error.message);
         } else {
-            // ... (restante do sucesso)
+            // MENSAGEM PARA VOCÊ NO WHATSAPP
+            let mensagem = `*SOLICITAÇÃO DE ACESSO*%0A%0ANome: ${nome}%0AUsuário: ${user}%0AToken: ${dadosParaInserir.token}%0A%0APor favor, ative este cadastro!`;
+            let linkWhatsApp = `https://wa.me/5569981128233?text=${encodeURIComponent(mensagem)}`;
+
+            alert("CADASTRO REALIZADO! Redirecionando para enviar o token ao Administrador.");
+            window.open(linkWhatsApp, '_blank');
+            window.location.href = "index.html"; // Volta para o login
         }
     } catch (e) {
         alert("Erro inesperado: " + e.message);
