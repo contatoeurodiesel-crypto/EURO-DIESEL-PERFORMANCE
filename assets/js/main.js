@@ -51,36 +51,23 @@ async function cadastrarComToken() {
     let ddi = document.getElementById('ddi').value;
     let tel = document.getElementById('telefone').value;
     
-    if (!nome || !user || !pass || !tel) {
-        alert("POR FAVOR, PREENCHA TODOS OS CAMPOS!");
-        return;
-    }
+    // ... (restante da validação inicial)
 
-    // 1. Gerar Token (Ex: ABCD-1234-EFGH)
-    const gerarParte = () => Math.random().toString(36).substring(2, 6).toUpperCase();
-    let token = `${gerarParte()}-${gerarParte()}-${gerarParte()}`;
+    let token = `${gerarParte()}-${gerarParte()}-${gerarParte()}`; // O token do cadastro
 
-    // 2. Salvar no Supabase
     try {
-        const { error } = await _supabase
-            .from('usuarios')
-            .insert([{ 
-                nome: nome, 
-                usuario: user, 
-                senha: pass, 
-                telefone: ddi + tel, 
-                token: token, 
-                status: 'PENDENTE' 
-            }]);
+        const { error } = await _supabase.from('usuarios').insert([{ 
+            nome, usuario: user, senha: pass, telefone: ddi + tel, token: token, status: 'PENDENTE' 
+        }]);
 
         if (error) {
             alert("Erro ao cadastrar: " + error.message);
         } else {
-            // 3. Montar mensagem para seu WhatsApp (Substitua pelo seu número)
-            let mensagem = `*NOVO CADASTRO PENDENTE*%0A%0A*Nome:* ${nome}%0A*Usuário:* ${user}%0A*Token de Acesso:* ${token}%0A%0A*Por favor, aprove este acesso.*`;
-            let linkWhatsApp = `https://wa.me/5569981128233?text=${mensagem}`;
+            // Mensagem que o usuário envia para VOCÊ
+            let mensagem = `*SOLICITAÇÃO DE ACESSO*%0A%0ANome: ${nome}%0AUsuário: ${user}%0AToken gerado: ${token}%0A%0APor favor, ative meu cadastro!`;
+            let linkWhatsApp = `https://wa.me/5569981128233?text=${encodeURIComponent(mensagem)}`;
 
-            alert("CADASTRO REALIZADO! Seu token é: " + token + "\n\nVocê será redirecionado para enviar este token ao Administrador.");
+            alert("CADASTRO REALIZADO! Seu token: " + token + "\n\nVocê será redirecionado para enviar este token ao Administrador.");
             window.open(linkWhatsApp, '_blank');
             window.location.href = "index.html";
         }
