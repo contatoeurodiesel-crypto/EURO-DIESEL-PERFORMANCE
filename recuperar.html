@@ -1,5 +1,22 @@
-<select id="ddi">
-    <option value="+55" selected>+55 (BRASIL)</option>
-    <option value="+1">+1 (EUA)</option>
-    </select>
-<input type="tel" id="telefone" placeholder="DIGITE SEU TELEFONE">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Senha - Euro Diesel</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>RECUPERAR ACESSO</h2>
+        <select id="ddi" style="width: 100%; padding: 12px; margin: 6px 0; background: #000; border: 1px solid #E7272D; color: #fff;">
+            <option value="+55">+55 (BRASIL)</option>
+            <option value="+1">+1 (EUA)</option>
+        </select>
+        <input type="tel" id="telefone" placeholder="DIGITE SEU TELEFONE">
+        <button onclick="recuperarSenha()">ENVIAR SOLICITAÇÃO</button>
+        <a href="index.html">VOLTAR AO LOGIN</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
