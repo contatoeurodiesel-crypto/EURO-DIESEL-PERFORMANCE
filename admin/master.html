@@ -15,13 +15,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        // Função que será chamada ao carregar a página
-        window.onload = carregarPendentes;
-
-    // Chama a proteção e a lista de pendentes
-    window.onload = async function() {
-        await verificarAcessoMaster(); // Checa se é Master
-        carregarPendentes();           // Carrega os dados
-    };
+        // Função única que executa tudo o que é necessário ao carregar a página
+        window.onload = async function() {
+            await verificarAcessoMaster(); // 1. Primeiro checa a segurança
+            carregarPendentes();           // 2. Depois carrega a lista
+        };
     </script>
-</head>
+</body>
+</html>
