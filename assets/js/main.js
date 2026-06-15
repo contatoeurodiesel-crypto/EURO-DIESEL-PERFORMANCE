@@ -16,6 +16,12 @@ const { data, error } = await _supabase
         .eq('usuario', user)
         .eq('senha', pass) // REMOVA o // daqui
         .maybeSingle();
+    // ... logo após o const { data, error } = ...
+console.log("Dados retornados pelo banco:", data); 
+
+if (data && data.status !== 'APROVADO') {
+    console.log("O status lido foi:", data.status);
+}
 
     if (error) {
         alert("Erro no Banco: " + error.message);
