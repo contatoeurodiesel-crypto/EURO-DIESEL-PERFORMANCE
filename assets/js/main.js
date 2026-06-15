@@ -72,5 +72,27 @@ async function verificarAtivacao() {
         window.location.href = "home.html";
     }
 }
+async function processarCadastro() {
+    let tokenDigitado = document.getElementById('tokenAtivacao').value.trim().toUpperCase();
 
+    // SE o usuário preencheu o campo de token, ele quer ATIVAR
+    if (tokenDigitado) {
+        const { data, error } = await _supabase
+            .from('usuarios')
+            .select('*')
+            .eq('codigo_ativacao', tokenDigitado) // Busca pelo token que você gerou
+            .maybeSingle();
+
+        if (error || !data) {
+            alert("TOKEN INVÁLIDO OU NÃO APROVADO!");
+        } else {
+            alert("ATIVADO COM SUCESSO!");
+            localStorage.setItem('usuarioLogado', data.usuario);
+            window.location.href = "home.html";
+        }
+    } else {
+        // SE o campo estiver vazio, ele quer fazer o cadastro NORMAL
+        cadastrarComToken();
+    }
+}
 // ... (mantenha o resto das suas funções carregarPendentes, aprovar, etc.)
