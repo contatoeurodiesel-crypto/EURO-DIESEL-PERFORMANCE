@@ -9,8 +9,9 @@ body { background-color: #000; color: #fff; display: flex; justify-content: cent
     letter-spacing: -1px;
     margin-bottom: 25px;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Alinha no topo para o ® ficar correto */
     justify-content: center;
+    position: relative;
 }
 .euro {
     background: linear-gradient(to bottom, #FF0000, #800000);
@@ -21,11 +22,13 @@ body { background-color: #000; color: #fff; display: flex; justify-content: cent
     color: #FF0000;
     margin-left: 5px;
 }
+/* Posicionamento exato do ® */
 .registered {
     font-size: 14px;
-    color: #fff;
-    margin-left: 2px;
-    vertical-align: super;
+    color: #FF0000;
+    margin-left: 4px;
+    margin-top: 5px; /* Ajuste fino para ficar alinhado ao topo do L */
+    font-family: sans-serif;
 }
 
 /* --- CONTAINER CENTRAL --- */
