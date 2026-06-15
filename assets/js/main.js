@@ -42,27 +42,18 @@ async function cadastrarComToken() {
     }
 }
 
-// Função de Ativação (O usuário usa o código enviado pelo Master)
+// Altere esta parte no seu main.js para refletir o nome real da coluna no Supabase
 async function processarCadastro() {
     let tokenDigitado = document.getElementById('tokenAtivacao').value.trim().toUpperCase();
 
     if (tokenDigitado) {
-        // Busca o usuário pelo código de ativação gerado pelo Master
         const { data, error } = await _supabase
             .from('usuarios')
             .select('*')
-            .eq('codigo_ativacao', tokenDigitado) 
+            .eq('token_ativo', tokenDigitado) // Mude aqui para o nome exato da coluna que você criou
             .maybeSingle();
 
-        if (error || !data) {
-            alert("TOKEN INVÁLIDO OU NÃO APROVADO!");
-        } else {
-            alert("ATIVADO COM SUCESSO! BEM-VINDO " + data.nome);
-            localStorage.setItem('usuarioLogado', data.usuario);
-            window.location.href = "home.html";
-        }
-    } else {
-        cadastrarComToken();
+        // ... resto da função
     }
 }
 
