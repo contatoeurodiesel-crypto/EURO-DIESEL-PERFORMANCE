@@ -43,26 +43,45 @@ async function login() {
     }
 }
 
-// Cadastro (Única versão correta)
-async function cadastrar() {
+// Cadastro com Geração de Token e Envio via WhatsApp
+async function cadastrarComToken() {
     let nome = document.getElementById('nome').value;
     let user = document.getElementById('user').value.trim().toUpperCase();
     let pass = document.getElementById('pass').value.trim();
-
-    if (!nome || !user || !pass) {
+    let ddi = document.getElementById('ddi').value;
+    let tel = document.getElementById('telefone').value;
+    
+    if (!nome || !user || !pass || !tel) {
         alert("POR FAVOR, PREENCHA TODOS OS CAMPOS!");
         return;
     }
 
+    // 1. Gerar Token (Ex: ABCD-1234-EFGH)
+    const gerarParte = () => Math.random().toString(36).substring(2, 6).toUpperCase();
+    let token = `${gerarParte()}-${gerarParte()}-${gerarParte()}`;
+
+    // 2. Salvar no Supabase
     try {
         const { error } = await _supabase
             .from('usuarios')
-            .insert([{ nome: nome, usuario: user, senha: pass, nivel: 'COMUM' }]);
+            .insert([{ 
+                nome: nome, 
+                usuario: user, 
+                senha: pass, 
+                telefone: ddi + tel, 
+                token: token, 
+                status: 'PENDENTE' 
+            }]);
 
         if (error) {
             alert("Erro ao cadastrar: " + error.message);
         } else {
-            alert("CADASTRO REALIZADO COM SUCESSO!");
+            // 3. Montar mensagem para seu WhatsApp (Substitua pelo seu número)
+            let mensagem = `*NOVO CADASTRO PENDENTE*%0A%0A*Nome:* ${nome}%0A*Usuário:* ${user}%0A*Token de Acesso:* ${token}%0A%0A*Por favor, aprove este acesso.*`;
+            let linkWhatsApp = `https://wa.me/5569981128233?text=${mensagem}`;
+
+            alert("CADASTRO REALIZADO! Seu token é: " + token + "\n\nVocê será redirecionado para enviar este token ao Administrador.");
+            window.open(linkWhatsApp, '_blank');
             window.location.href = "index.html";
         }
     } catch (e) {
