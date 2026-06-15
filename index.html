@@ -11,14 +11,19 @@
             <span class="e-risco"></span>
             <span class="letra-e">E</span><span class="outras-letras">URO DIESEL</span>
         </div>
+        
         <input type="text" id="user" placeholder="USUÁRIO">
-        <input type="password" id="pass" placeholder="SENHA">
-        <button onclick="login()">ENTRAR</button>
+        
+        <div style="position: relative; display: flex; align-items: center;">
+            <input type="password" id="pass" placeholder="SENHA" style="width: 100%;">
+            <button type="button" onclick="toggleSenha()" style="position: absolute; right: 5px; cursor: pointer; border: none; background: transparent;">👁️</button>
+        </div>
+
+        <button onclick="login()" style="margin-top: 10px;">ENTRAR</button>
         <a href="#">INSCREVA-SE</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <script src="assets/js/main.js"></script>
 </body>
 </html>
