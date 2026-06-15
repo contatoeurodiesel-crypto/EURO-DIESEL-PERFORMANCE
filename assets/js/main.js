@@ -102,13 +102,16 @@ async function aprovarUsuario(usuario) {
 // --- FUNÇÕES DE CADASTRO (ADICIONE AO FINAL DO SEU MAIN.JS) ---
 
 async function solicitarCadastro() {
+    let nome = document.getElementById('nome').value.trim(); // Captura o nome
     let user = document.getElementById('usuario').value.trim().toUpperCase();
     let pass = document.getElementById('senha').value.trim();
     let ddi = document.getElementById('ddi').value;
     let tel = ddi + document.getElementById('telefone').value.trim();
     let tokenGerado = Math.floor(100000 + Math.random() * 900000).toString(); 
 
+    // Adicionamos 'nome: nome' na lista de campos inseridos
     const { error } = await _supabase.from('usuarios').insert([{ 
+        nome: nome, 
         usuario: user, 
         senha: pass, 
         telefone: tel, 
