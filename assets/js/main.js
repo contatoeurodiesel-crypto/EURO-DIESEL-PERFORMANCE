@@ -101,58 +101,61 @@ async function aprovarUsuario(usuario) {
     }
 }
 
-// --- FUNÇÕES DE CADASTRO (ADICIONE AO FINAL DO SEU MAIN.JS) ---
+// Função para gerar tokens aleatórios
+function gerarToken(partes) {
+    let formato = "";
+    for (let i = 0; i < partes; i++) {
+        formato += Math.random().toString(36).substring(2, 5).toUpperCase();
+        if (i < partes - 1) formato += "-";
+    }
+    return formato;
+}
+
+// Função para gerar tokens aleatórios
+function gerarToken(partes) {
+    let formato = "";
+    for (let i = 0; i < partes; i++) {
+        formato += Math.random().toString(36).substring(2, 5).toUpperCase();
+        if (i < partes - 1) formato += "-";
+    }
+    return formato;
+}
 
 async function solicitarCadastro() {
-    let nome = document.getElementById('nome').value.trim(); // Captura o nome
+    let nome = document.getElementById('nome').value.trim();
     let user = document.getElementById('usuario').value.trim().toUpperCase();
     let pass = document.getElementById('senha').value.trim();
-    let ddi = document.getElementById('ddi').value;
-    let tel = ddi + document.getElementById('telefone').value.trim();
-    let tokenGerado = Math.floor(100000 + Math.random() * 900000).toString(); 
+    let tel = document.getElementById('ddi').value + document.getElementById('telefone').value.trim();
+    let tokenSolicitacao = gerarToken(3); // XXX-XXX-XXX
 
-    // Adicionamos 'nome: nome' na lista de campos inseridos
     const { error } = await _supabase.from('usuarios').insert([{ 
-        nome: nome, 
-        usuario: user, 
-        senha: pass, 
-        telefone: tel, 
-        token: tokenGerado, 
-        status: 'PENDENTE', 
-        nivel: 'COMUM' 
+        nome, usuario: user, senha: pass, telefone: tel, 
+        token: tokenSolicitacao, status: 'PENDENTE', nivel: 'COMUM' 
     }]);
 
-    if (error) {
-        alert("Erro ao solicitar: " + error.message);
-    } else {
-        alert("SOLICITAÇÃO ENVIADA! Token: " + tokenGerado + ". (Copie este número e insira no campo TOKEN para ativar).");
-    }
+    if (error) alert("Erro: " + error.message);
+    else alert("SOLICITAÇÃO ENVIADA! Token: " + tokenSolicitacao);
 }
 
 async function ativarConta() {
     let user = document.getElementById('usuario').value.trim().toUpperCase();
     let tokenDigitado = document.getElementById('token').value.trim();
 
+    // Busca o usuário pelo token único
     const { data, error } = await _supabase.from('usuarios')
-        .select('*')
-        .eq('usuario', user)
-        .eq('token', tokenDigitado)
-        .maybeSingle();
+        .select('*').eq('usuario', user).eq('token', tokenDigitado).maybeSingle();
 
-    if (error || !data) {
-        alert("TOKEN INVÁLIDO OU USUÁRIO INCORRETO!");
-        return;
-    }
+    if (!data) { alert("TOKEN INVÁLIDO!"); return; }
 
+    let novoTokenAtivacao = gerarToken(4); // XXX-XXX-XXX-XXX
     const { error: updateError } = await _supabase.from('usuarios')
-        .update({ status: 'APROVADO', token: null })
+        .update({ status: 'APROVADO', token: novoTokenAtivacao })
         .eq('usuario', user);
 
-    if (updateError) {
-        alert("Erro ao ativar.");
-    } else {
+    if (updateError) alert("Erro ao ativar.");
+    else {
         localStorage.setItem('usuarioLogado', user);
-        alert("CONTA ATIVADA! Bem-vindo.");
+        alert("CONTA ATIVADA! Seu código de acesso único é: " + novoTokenAtivacao);
         window.location.href = "home.html";
     }
 }
