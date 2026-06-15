@@ -99,29 +99,28 @@ async function aprovarUsuario(usuario) {
     }
 }
 
-// --- NOVA LÓGICA DE CADASTRO E ATIVAÇÃO ---
+// --- FUNÇÕES DE CADASTRO (ADICIONE AO FINAL DO SEU MAIN.JS) ---
 
 async function solicitarCadastro() {
     let user = document.getElementById('usuario').value.trim().toUpperCase();
     let pass = document.getElementById('senha').value.trim();
-    let tel = document.getElementById('telefone').value.trim();
+    let ddi = document.getElementById('ddi').value;
+    let tel = ddi + document.getElementById('telefone').value.trim();
     let tokenGerado = Math.floor(100000 + Math.random() * 900000).toString(); 
 
-    const { error } = await _supabase
-        .from('usuarios')
-        .insert([{ 
-            usuario: user, 
-            senha: pass, 
-            telefone: tel, 
-            token: tokenGerado, 
-            status: 'PENDENTE', 
-            nivel: 'COMUM' 
-        }]);
+    const { error } = await _supabase.from('usuarios').insert([{ 
+        usuario: user, 
+        senha: pass, 
+        telefone: tel, 
+        token: tokenGerado, 
+        status: 'PENDENTE', 
+        nivel: 'COMUM' 
+    }]);
 
     if (error) {
         alert("Erro ao solicitar: " + error.message);
     } else {
-        alert("SOLICITAÇÃO ENVIADA! O Token gerado é: " + tokenGerado + ". Envie ao usuário.");
+        alert("SOLICITAÇÃO ENVIADA! Token: " + tokenGerado + ". (Copie este número e insira no campo TOKEN para ativar).");
     }
 }
 
@@ -129,8 +128,7 @@ async function ativarConta() {
     let user = document.getElementById('usuario').value.trim().toUpperCase();
     let tokenDigitado = document.getElementById('token').value.trim();
 
-    const { data, error } = await _supabase
-        .from('usuarios')
+    const { data, error } = await _supabase.from('usuarios')
         .select('*')
         .eq('usuario', user)
         .eq('token', tokenDigitado)
@@ -141,8 +139,7 @@ async function ativarConta() {
         return;
     }
 
-    const { error: updateError } = await _supabase
-        .from('usuarios')
+    const { error: updateError } = await _supabase.from('usuarios')
         .update({ status: 'APROVADO', token: null })
         .eq('usuario', user);
 
@@ -150,7 +147,7 @@ async function ativarConta() {
         alert("Erro ao ativar.");
     } else {
         localStorage.setItem('usuarioLogado', user);
-        alert("CONTA ATIVADA! Redirecionando...");
-        window.location.href = "home.html"; // Vai direto para o painel do usuário
+        alert("CONTA ATIVADA! Bem-vindo.");
+        window.location.href = "home.html";
     }
 }
