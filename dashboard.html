@@ -28,7 +28,11 @@
 
     <div class="container">
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="DIGITE O CÓDIGO OU INSTRUÇÃO..." oninput="filtrarParametros()">
+            <input type="text" 
+       id="search-input" 
+       placeholder="DIGITE O CÓDIGO OU INSTRUÇÃO..." 
+       oninput="filtrarParametros()" 
+       autocomplete="off">
             <div class="stats">
                 <span>TOTAL: <b id="total-db">0</b></span> | <span>EXIBINDO: <b id="count-match">0</b></span>
             </div>
