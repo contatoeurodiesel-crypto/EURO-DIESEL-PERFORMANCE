@@ -15,16 +15,17 @@
         <input type="text" id="user" placeholder="USUÁRIO">
         
         <div class="password-wrapper">
-            <input type="password" id="pass" placeholder="SENHA" style="padding-right: 60px;">
-            <button type="button" id="btnMostrar" onclick="toggleSenha()" class="btn-mostrar">MOSTRAR</button>
+            <input type="password" id="pass" placeholder="SENHA" style="width: 100%;">
+
+        <div class="action-row">
+            <div class="checkbox-container">
+                <input type="checkbox" id="lembrar">
+                <label for="lembrar">Lembrar senha</label>
+            </div>
+            <button type="button" id="btnMostrar" onclick="toggleSenha()" class="btn-toggle-text">MOSTRAR</button>
         </div>
 
-        <div class="checkbox-container">
-            <input type="checkbox" id="lembrar"> Lembrar senha
-        </div>
-
-        <button onclick="login()">ENTRAR</button>
-        <a href="#" class="link-esqueci">ESQUECEU A SENHA?</a>
+        <button onclick="login()" style="margin-top: 10px;">ENTRAR</button>
         <a href="inscrever.html" style="margin-top: 15px;">INSCREVA-SE</a>
     </div>
 
