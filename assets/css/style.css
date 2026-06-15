@@ -12,3 +12,12 @@ body { background-color: #000; color: #fff; display: flex; justify-content: cent
 input { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid #FF0000; color: #fff; }
 button { width: 100%; padding: 12px; background: #FF0000; border: none; color: white; font-weight: bold; cursor: pointer; }
 a { color: #888; font-size: 12px; display: block; margin-top: 10px; text-decoration: none; }
+/* --- ADICIONE ESTE BLOCO NO FINAL DO SEU ARQUIVO --- */
+.password-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
+.btn-mostrar { 
+    position: absolute; right: 5px; border: none; background: transparent; 
+    color: #FF0000; cursor: pointer; font-size: 10px; font-weight: bold; 
+}
+.checkbox-container { display: flex; align-items: center; margin: 10px 0; color: #888; font-size: 11px; }
+.checkbox-container input { width: 15px; margin-right: 8px; border: 1px solid #FF0000; }
+.link-esqueci { color: #888; font-size: 10px; text-decoration: none; margin-top: 5px; display: block; }
