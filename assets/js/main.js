@@ -1,5 +1,4 @@
 // A biblioteca já cria a variável 'supabase', não precisamos recriar aqui.
-// Apenas configuramos o cliente:
 const _supabase = supabase.createClient('https://ygihkuvmmusrurgxzqjc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnaWhrdXZtbXVzcnVyZ3h6cWpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NzE5MjcsImV4cCI6MjA5NzA0NzkyN30.LdIJRiRlGgf7ijLjkv8Ts2zcKTg5tbwFyLNWgjF0yEc');
 
 // Função de Mostrar/Ocultar Senha
@@ -44,7 +43,7 @@ async function login() {
     }
 }
 
-// Cadastro
+// Cadastro (Única versão correta)
 async function cadastrar() {
     let nome = document.getElementById('nome').value;
     let user = document.getElementById('user').value.trim().toUpperCase();
