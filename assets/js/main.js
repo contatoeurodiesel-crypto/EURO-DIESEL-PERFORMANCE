@@ -11,11 +11,11 @@ async function login() {
     // ... dentro da função login, substitua o bloco do .eq ...
     // Apenas para teste, substitua o bloco do .eq('senha', pass)
 const { data, error } = await _supabase
-    .from('usuarios')
-    .select('usuario, senha, status, nivel')
-    .eq('usuario', user)
-    // .eq('senha', pass) // COMENTE ESTA LINHA COM // PARA TESTAR SEM A SENHA
-    .maybeSingle();;
+        .from('usuarios')
+        .select('usuario, senha, status, nivel')
+        .eq('usuario', user)
+        .eq('senha', pass) // REMOVA o // daqui
+        .maybeSingle();
 
     if (error) {
         alert("Erro no Banco: " + error.message);
