@@ -11,10 +11,9 @@
         <img src="assets/images/logo.png" alt="EURO DIESEL" style="width: 100%; max-width: 320px; height: auto;">
     </div>
     
+    <input type="text" id="nome" placeholder="NOME COMPLETO">
     <input type="text" id="usuario" placeholder="USUÁRIO">
     <input type="password" id="senha" placeholder="SENHA">
-        <input type="text" id="nome" placeholder="NOME COMPLETO">
-<input type="text" id="usuario" placeholder="USUÁRIO">
     
     <select id="ddi" style="width: 100%; padding: 12px; margin: 6px 0; background: #000; border: 1px solid #E7272D; color: #fff;">
         <option value="+55">+55 (BRASIL)</option>
@@ -27,9 +26,23 @@
 
     <button onclick="solicitarCadastro()">SOLICITAR CADASTRO</button>
     <button onclick="ativarConta()" style="background: #E7272D; color: #fff;">ATIVAR CONTA E ENTRAR</button>
-    
-    <a href="index.html">VOLTAR AO LOGIN</a>
-</div>
+    ```
+
+### 2. Dica para o Painel Master
+Como agora você adicionou o campo `nome` no cadastro, é legal mostrar esse nome no seu **Painel Master** para ficar mais fácil de saber quem é a pessoa que você está aprovando.
+
+No seu `main.js`, localize a função `carregarPendentes()` e altere o `html +=` para incluir o nome:
+
+```javascript
+    data.forEach(user => {
+        html += `<div style="border:1px solid #E7272D; padding:10px; margin:5px;">
+                    <p>NOME: ${user.nome || 'NÃO INFORMADO'}</p>
+                    <p>USUÁRIO: ${user.usuario}</p>
+                    <p>TELEFONE: ${user.telefone || 'NÃO INFORMADO'}</p>
+                    <p>TOKEN: <b>${user.token}</b></p>
+                    <button onclick="aprovarUsuario('${user.usuario}')">APROVAR</button>
+                 </div>`;
+    });
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/main.js"></script>
