@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel Principal - Euro Diesel</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao Sistema Euro Diesel</h1>
+        <p>Você está na área restrita!</p>
+        <a href="index.html" onclick="localStorage.clear()">SAIR</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        window.onload = verificarStatus;
+    </script>
+</body>
+</html>
