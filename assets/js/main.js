@@ -134,12 +134,12 @@ async function aprovar(id, nome, telefone) {
     if (error) {
         alert("Erro ao aprovar: " + error.message);
     } else {
-        // 3. Montar mensagem com o novo formato
-        let mensagem = `*CADASTRO APROVADO!*%0A%0AOlá ${nome}, seu acesso foi liberado.%0A%0A*Seu código de ativação:* ${codigoAtivacao}%0A%0AInsira este código para iniciar.`;
-        let linkWhatsApp = `https://wa.me/${telefone.replace('+', '')}?text=${mensagem}`;
+        // 3. Link para enviar o código final ao usuário via WhatsApp
+        let mensagem = `*CADASTRO APROVADO!*%0A%0AOlá ${nome}, seu acesso foi liberado.%0A%0A*Seu código de ativação:* ${codigoAtivacao}%0A%0AInsira este código no aplicativo para iniciar.`;
+        let linkWhatsApp = `https://wa.me/${telefone.replace('+', '').replace(' ', '')}?text=${mensagem}`;
 
         window.open(linkWhatsApp, '_blank');
         alert("CÓDIGO " + codigoAtivacao + " GERADO E ENVIADO!");
-        carregarPendentes(); // Atualiza a lista
+        carregarPendentes();
     }
 }
