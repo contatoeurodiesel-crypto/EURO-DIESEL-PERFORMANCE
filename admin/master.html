@@ -17,5 +17,11 @@
     <script>
         // Função que será chamada ao carregar a página
         window.onload = carregarPendentes;
+
+    // Chama a proteção e a lista de pendentes
+    window.onload = async function() {
+        await verificarAcessoMaster(); // Checa se é Master
+        carregarPendentes();           // Carrega os dados
+    };
     </script>
 </head>
