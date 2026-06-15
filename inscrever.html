@@ -7,31 +7,27 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo-container">
-            <img src="assets/images/logo.png" alt="EURO DIESEL" style="width: 100%; max-width: 320px; height: auto;">
-        </div>
-        
-        <input type="text" id="usuario" placeholder="USUÁRIO">
-<input type="password" id="senha" placeholder="SENHA">
-<input type="text" id="telefone" placeholder="TELEFONE">
-<input type="text" id="token" placeholder="INSIRA SEU TOKEN (APÓS SOLICITAR)">
-
-<button onclick="solicitarCadastro()">SOLICITAR CADASTRO</button>
-<button onclick="ativarConta()">ATIVAR CONTA E ENTRAR</button>
-        
-        <select id="ddi" style="width: 100%; padding: 12px; margin: 6px 0; background: #000; border: 1px solid #E7272D; color: #fff;">
-            <option value="+55">+55 (BRASIL)</option>
-            <option value="+1">+1 (EUA)</option>
-            <option value="+351">+351 (PORTUGAL)</option>
-        </select>
-        
-        <input type="tel" id="telefone" placeholder="WHATSAPP (SOMENTE NÚMEROS)">
-
-        <input type="text" id="tokenAtivacao" placeholder="INSIRA SEU TOKEN (SE JÁ RECEBEU)">
-
-        <button onclick="processarCadastro()">CADASTRAR OU ATIVAR</button>
-        <a href="index.html">VOLTAR AO LOGIN</a>
+    <div class="logo-container">
+        <img src="assets/images/logo.png" alt="EURO DIESEL" style="width: 100%; max-width: 320px; height: auto;">
     </div>
+    
+    <input type="text" id="usuario" placeholder="USUÁRIO">
+    <input type="password" id="senha" placeholder="SENHA">
+    
+    <select id="ddi" style="width: 100%; padding: 12px; margin: 6px 0; background: #000; border: 1px solid #E7272D; color: #fff;">
+        <option value="+55">+55 (BRASIL)</option>
+        <option value="+1">+1 (EUA)</option>
+        <option value="+351">+351 (PORTUGAL)</option>
+    </select>
+    
+    <input type="tel" id="telefone" placeholder="WHATSAPP (SOMENTE NÚMEROS)">
+    <input type="text" id="token" placeholder="TOKEN DE ATIVAÇÃO">
+
+    <button onclick="solicitarCadastro()">SOLICITAR CADASTRO</button>
+    <button onclick="ativarConta()" style="background: #E7272D; color: #fff;">ATIVAR CONTA E ENTRAR</button>
+    
+    <a href="index.html">VOLTAR AO LOGIN</a>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/main.js"></script>
