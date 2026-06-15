@@ -78,3 +78,17 @@ async function carregarPendentes() {
     });
     listaDiv.innerHTML = html;
 }
+
+async function aprovarUsuario(usuario) {
+    const { error } = await _supabase
+        .from('usuarios')
+        .update({ status: 'APROVADO' })
+        .eq('usuario', usuario);
+
+    if (error) {
+        alert("Erro ao aprovar: " + error.message);
+    } else {
+        alert("USUÁRIO APROVADO!");
+        carregarPendentes(); // Recarrega a lista
+    }
+}
