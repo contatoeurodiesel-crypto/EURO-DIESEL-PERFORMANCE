@@ -98,3 +98,59 @@ async function aprovarUsuario(usuario) {
         carregarPendentes(); // Recarrega a lista
     }
 }
+
+// --- NOVA LÓGICA DE CADASTRO E ATIVAÇÃO ---
+
+async function solicitarCadastro() {
+    let user = document.getElementById('usuario').value.trim().toUpperCase();
+    let pass = document.getElementById('senha').value.trim();
+    let tel = document.getElementById('telefone').value.trim();
+    let tokenGerado = Math.floor(100000 + Math.random() * 900000).toString(); 
+
+    const { error } = await _supabase
+        .from('usuarios')
+        .insert([{ 
+            usuario: user, 
+            senha: pass, 
+            telefone: tel, 
+            token: tokenGerado, 
+            status: 'PENDENTE', 
+            nivel: 'COMUM' 
+        }]);
+
+    if (error) {
+        alert("Erro ao solicitar: " + error.message);
+    } else {
+        alert("SOLICITAÇÃO ENVIADA! O Token gerado é: " + tokenGerado + ". Envie ao usuário.");
+    }
+}
+
+async function ativarConta() {
+    let user = document.getElementById('usuario').value.trim().toUpperCase();
+    let tokenDigitado = document.getElementById('token').value.trim();
+
+    const { data, error } = await _supabase
+        .from('usuarios')
+        .select('*')
+        .eq('usuario', user)
+        .eq('token', tokenDigitado)
+        .maybeSingle();
+
+    if (error || !data) {
+        alert("TOKEN INVÁLIDO OU USUÁRIO INCORRETO!");
+        return;
+    }
+
+    const { error: updateError } = await _supabase
+        .from('usuarios')
+        .update({ status: 'APROVADO', token: null })
+        .eq('usuario', user);
+
+    if (updateError) {
+        alert("Erro ao ativar.");
+    } else {
+        localStorage.setItem('usuarioLogado', user);
+        alert("CONTA ATIVADA! Redirecionando...");
+        window.location.href = "home.html"; // Vai direto para o painel do usuário
+    }
+}
