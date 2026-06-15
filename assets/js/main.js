@@ -33,11 +33,16 @@ async function login() {
         } else if (!data) {
             alert("USUÁRIO OU SENHA INCORRETOS!");
         } else {
-            alert("BEM-VINDO, " + data.nome);
-            if (data.nivel === 'MASTER') {
-                window.location.href = "admin/master.html";
-            }
-        }
+    alert("BEM-VINDO, " + data.nome);
+    // ADICIONE ESTA LINHA:
+    localStorage.setItem('usuarioLogado', user); 
+    
+    if (data.nivel === 'MASTER') {
+        window.location.href = "admin/master.html";
+    } else {
+        window.location.href = "home.html"; // Redireciona usuários comuns
+    }
+}
     } catch (e) {
         alert("Erro inesperado: " + e.message);
     }
