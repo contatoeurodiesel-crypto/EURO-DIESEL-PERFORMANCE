@@ -88,16 +88,23 @@ async function carregarPendentes() {
 }
 
 async function aprovarUsuario(usuario) {
+    // Gera um código único de acesso final (XXX-XXX-XXX-XXX)
+    let codigoFinal = Math.random().toString(36).substring(2, 6).toUpperCase() + "-" + 
+                      Math.random().toString(36).substring(2, 6).toUpperCase();
+
     const { error } = await _supabase
         .from('usuarios')
-        .update({ status: 'APROVADO' })
+        .update({ 
+            status: 'APROVADO', 
+            token: codigoFinal // O token agora passa a ser a senha de acesso aprovada
+        })
         .eq('usuario', usuario);
 
     if (error) {
         alert("Erro ao aprovar: " + error.message);
     } else {
-        alert("USUÁRIO APROVADO!");
-        carregarPendentes(); // Recarrega a lista
+        alert("USUÁRIO APROVADO! O código de acesso gerado foi: " + codigoFinal + ". ENVIE PARA O CLIENTE.");
+        carregarPendentes(); 
     }
 }
 
