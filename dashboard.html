@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EURO DIESEL | PAINEL DE CONTROLE</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* CSS ESPECÍFICO DO PAINEL PARA MANTER O PADRÃO */
+        body { background: #050505; color: #fff; font-family: sans-serif; }
+        
+        /* BUSCA CENTRALIZADA */
+        .search-container { max-width: 600px; margin: 100px auto; text-align: center; }
+        #search-input { width: 100%; padding: 20px; background: #111; border: 1px solid #333; color: #fff; font-size: 1.2rem; text-align: center; text-transform: uppercase; }
+        
+        /* CONTADORES (SÓ APARECEM SE TIVER DADOS) */
+        .stats { margin-top: 10px; font-size: 0.7rem; color: #555; }
+        
+        /* RESULTADOS */
+        #results { margin-top: 20px; text-align: left; }
+        .card { padding: 15px; border-bottom: 1px solid #1a1a1a; display: flex; justify-content: space-between; }
+        
+        /* BOTÃO MASTER (OCULTO POR PADRÃO) */
+        #master-zone { display: none; margin-top: 50px; border-top: 1px solid #ff0000; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="DIGITE O CÓDIGO OU INSTRUÇÃO..." oninput="filtrarParametros()">
+            <div class="stats">
+                <span>TOTAL: <b id="total-db">0</b></span> | <span>EXIBINDO: <b id="count-match">0</b></span>
+            </div>
+        </div>
+
+        <div id="results"></div>
+
+        <div id="master-zone">
+            <h3>ÁREA MASTER</h3>
+            <textarea id="import-data" placeholder="COLE DADOS PARA IMPORTAR..."></textarea>
+            <button onclick="processarImportacao()">IMPORTAR E GRAVAR</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
