@@ -158,3 +158,24 @@ async function verificarAcessoMaster() {
         window.location.href = "../index.html";
     }
 }
+async function verificarAtivacao() {
+    let codigo = document.getElementById('codigoInput').value.trim().toUpperCase();
+
+    // Busca o usuário que tenha esse código de ativação
+    const { data, error } = await _supabase
+        .from('usuarios')
+        .select('*')
+        .eq('codigo_ativacao', codigo)
+        .eq('status', 'APROVADO')
+        .maybeSingle();
+
+    if (error) {
+        alert("Erro ao verificar: " + error.message);
+    } else if (!data) {
+        alert("CÓDIGO INVÁLIDO OU NÃO APROVADO!");
+    } else {
+        alert("ATIVADO COM SUCESSO! Bem-vindo, " + data.nome);
+        // Aqui você pode redirecionar o usuário para a página principal dele
+        window.location.href = "home.html";
+    }
+}
