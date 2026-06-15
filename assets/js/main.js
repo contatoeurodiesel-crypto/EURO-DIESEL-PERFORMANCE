@@ -9,12 +9,13 @@ async function login() {
     console.log("Tentando logar com:", user, pass);
 
     // ... dentro da função login, substitua o bloco do .eq ...
-    const { data, error } = await _supabase
-        .from('usuarios')
-        .select('usuario, senha, status, nivel')
-        .eq('usuario', user) // O user já está com .trim().toUpperCase()
-        .eq('senha', pass)   // O pass está com .trim()
-        .maybeSingle();
+    // Apenas para teste, substitua o bloco do .eq('senha', pass)
+const { data, error } = await _supabase
+    .from('usuarios')
+    .select('usuario, senha, status, nivel')
+    .eq('usuario', user)
+    // .eq('senha', pass) // COMENTE ESTA LINHA COM // PARA TESTAR SEM A SENHA
+    .maybeSingle();;
 
     if (error) {
         alert("Erro no Banco: " + error.message);
