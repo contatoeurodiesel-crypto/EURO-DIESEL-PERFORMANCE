@@ -14,10 +14,13 @@
         
         <input type="text" id="user" placeholder="USUÁRIO">
         
-        <div style="position: relative; display: flex; align-items: center;">
-            <input type="password" id="pass" placeholder="SENHA" style="width: 100%;">
-            <button type="button" onclick="toggleSenha()" style="position: absolute; right: 5px; cursor: pointer; border: none; background: transparent;">👁️</button>
-        </div>
+        <div style="position: relative; width: 100%;">
+    <input type="password" id="pass" placeholder="SENHA" style="width: 100%; padding-right: 40px;">
+    <button type="button" onclick="toggleSenha()" 
+        style="position: absolute; right: 0; top: 0; height: 100%; border: none; background: transparent; cursor: pointer; color: #888; font-size: 18px; padding: 0 10px;">
+        👁️
+    </button>
+</div>
 
         <button onclick="login()" style="margin-top: 10px;">ENTRAR</button>
         <a href="#">INSCREVA-SE</a>
