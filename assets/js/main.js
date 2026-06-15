@@ -8,11 +8,12 @@ async function login() {
     // Diagnóstico
     console.log("Tentando logar com:", user, pass);
 
+    // ... dentro da função login, substitua o bloco do .eq ...
     const { data, error } = await _supabase
         .from('usuarios')
         .select('usuario, senha, status, nivel')
-        .eq('usuario', user)
-        .eq('senha', pass)
+        .eq('usuario', user) // O user já está com .trim().toUpperCase()
+        .eq('senha', pass)   // O pass está com .trim()
         .maybeSingle();
 
     if (error) {
