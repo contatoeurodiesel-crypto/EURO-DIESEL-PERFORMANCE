@@ -119,12 +119,13 @@ async function carregarPendentes() {
     });
 }
 
-// Função para o MASTER gerar o Código de Ativação e enviar ao usuário
+// Função para o MASTER gerar o Código de Ativação (Formato XXX-XXX-XXX-XXX)
 async function aprovar(id, nome, telefone) {
-    // 1. Gerar Código de Ativação (Ex: ATIVA-9999)
-    let codigoAtivacao = "ATIVA-" + Math.floor(1000 + Math.random() * 9000);
+    // 1. Gerar Código no formato XXX-XXX-XXX-XXX
+    const gerarParte = () => Math.random().toString(36).substring(2, 5).toUpperCase();
+    let codigoAtivacao = `${gerarParte()}-${gerarParte()}-${gerarParte()}-${gerarParte()}`;
 
-    // 2. Atualizar o status para APROVADO e salvar o código no banco
+    // 2. Atualizar no banco
     const { error } = await _supabase
         .from('usuarios')
         .update({ status: 'APROVADO', codigo_ativacao: codigoAtivacao })
@@ -133,12 +134,12 @@ async function aprovar(id, nome, telefone) {
     if (error) {
         alert("Erro ao aprovar: " + error.message);
     } else {
-        // 3. Link para enviar o código final ao usuário via WhatsApp
-        let mensagem = `*CADASTRO APROVADO!*%0A%0AOlá ${nome}, seu acesso foi liberado.%0A%0A*Seu código de ativação:* ${codigoAtivacao}%0A%0AInsira este código no aplicativo para iniciar.`;
+        // 3. Montar mensagem com o novo formato
+        let mensagem = `*CADASTRO APROVADO!*%0A%0AOlá ${nome}, seu acesso foi liberado.%0A%0A*Seu código de ativação:* ${codigoAtivacao}%0A%0AInsira este código para iniciar.`;
         let linkWhatsApp = `https://wa.me/${telefone.replace('+', '')}?text=${mensagem}`;
 
         window.open(linkWhatsApp, '_blank');
-        alert("CÓDIGO GERADO E WHATSAPP ABERTO!");
-        carregarPendentes();
+        alert("CÓDIGO " + codigoAtivacao + " GERADO E ENVIADO!");
+        carregarPendentes(); // Atualiza a lista
     }
 }
