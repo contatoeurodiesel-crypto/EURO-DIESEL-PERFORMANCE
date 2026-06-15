@@ -14,16 +14,18 @@
         
         <input type="text" id="user" placeholder="USUÁRIO">
         
-        <div style="position: relative; width: 100%; display: flex; align-items: center;">
-            <input type="password" id="pass" placeholder="SENHA" style="width: 100%; padding-right: 80px;">
-            <button type="button" id="btnMostrar" onclick="toggleSenha()" 
-                style="position: absolute; right: 5px; border: none; background: transparent; color: #888; cursor: pointer; font-size: 10px; font-weight: bold;">
-                MOSTRAR
-            </button>
+        <div class="password-wrapper">
+            <input type="password" id="pass" placeholder="SENHA" style="padding-right: 60px;">
+            <button type="button" id="btnMostrar" onclick="toggleSenha()" class="btn-mostrar">MOSTRAR</button>
         </div>
 
-        <button onclick="login()" style="margin-top: 10px;">ENTRAR</button>
-        <a href="inscrever.html">INSCREVA-SE</a>
+        <div class="checkbox-container">
+            <input type="checkbox" id="lembrar"> Lembrar senha
+        </div>
+
+        <button onclick="login()">ENTRAR</button>
+        <a href="#" class="link-esqueci">ESQUECEU A SENHA?</a>
+        <a href="inscrever.html" style="margin-top: 15px;">INSCREVA-SE</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
