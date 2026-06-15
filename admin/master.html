@@ -1,8 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel MASTER - Euro Diesel</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
 <body>
-    <h1 style="color:red">PAINEL DO ADMINISTRADOR MASTER</h1>
-    <p>AQUI VOCÊ GERENCIA MEMBROS, TOKENS E A LIXEIRA.</p>
-    <a href="../index.html">SAIR</a>
-</body>
-</html>
+    <div class="container" style="width: 90%; max-width: 800px;">
+        <h1>USUÁRIOS PENDENTES</h1>
+        <div id="listaUsuarios">Carregando...</div>
+        <a href="../index.html">SAIR</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Função que será chamada ao carregar a página
+        window.onload = carregarPendentes;
+    </script>
+</head>
