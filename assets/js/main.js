@@ -38,3 +38,12 @@ function toggleSenha() {
     input.type = (input.type === 'password') ? 'text' : 'password';
     btn.innerText = (input.type === 'password') ? 'MOSTRAR' : 'OCULTAR';
 }
+
+async function verificarAcessoMaster() {
+    const userLogado = localStorage.getItem('usuarioLogado');
+    if (!userLogado) {
+        window.location.href = "../index.html";
+        return;
+    }
+    // Opcional: Adicionar verificação se o nível no banco ainda é MASTER
+}
