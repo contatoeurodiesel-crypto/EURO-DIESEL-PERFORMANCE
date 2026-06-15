@@ -5,10 +5,14 @@ const _supabase = supabase.createClient('https://ygihkuvmmusrurgxzqjc.supabase.c
 // Função do Olho
 function toggleSenha() {
     let inputPass = document.getElementById('pass');
+    let btn = document.getElementById('btnMostrar');
+    
     if (inputPass.type === 'password') {
         inputPass.type = 'text';
+        btn.innerText = 'OCULTAR';
     } else {
         inputPass.type = 'password';
+        btn.innerText = 'MOSTRAR';
     }
 }
 
