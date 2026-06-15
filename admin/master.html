@@ -15,11 +15,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        // Função única que executa tudo o que é necessário ao carregar a página
-        window.onload = async function() {
-    await verificarAcessoMaster(); 
-    carregarPendentes(); // <--- O erro está aqui!
-};
-    </script>
+    window.onload = async function() {
+        await verificarAcessoMaster(); 
+        // Adicionamos um pequeno tempo de espera ou apenas garantimos a chamada
+        if (document.getElementById('listaUsuarios')) {
+            carregarPendentes();
+        }
+    };
+</script>
 </body>
 </html>
