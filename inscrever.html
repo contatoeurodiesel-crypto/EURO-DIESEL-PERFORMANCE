@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro - Euro Diesel</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <h1>CADASTRO DE NOVO MEMBRO</h1>
-    <input type="text" id="nome" placeholder="NOME">
-    <input type="text" id="user" placeholder="USUÁRIO">
-    <input type="password" id="pass" placeholder="SENHA">
-    <button onclick="cadastrar()">CADASTRAR</button>
-    <a href="index.html">VOLTAR AO LOGIN</a>
+    <div class="container" style="width: 300px;">
+        <h1>CADASTRO</h1>
+        <input type="text" id="nome" placeholder="NOME">
+        <input type="text" id="user" placeholder="USUÁRIO">
+        <input type="password" id="pass" placeholder="SENHA">
+        <button onclick="cadastrar()" style="margin-top: 10px;">CADASTRAR</button>
+        <a href="index.html">VOLTAR AO LOGIN</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
