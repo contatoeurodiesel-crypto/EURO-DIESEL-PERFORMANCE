@@ -1,3 +1,5 @@
+// Adicione isto no topo do arquivo para ficar acessível globalmente
+const gerarParte = () => Math.random().toString(36).substring(2, 5).toUpperCase();
 // A biblioteca já cria a variável 'supabase', não precisamos recriar aqui.
 const _supabase = supabase.createClient('https://ygihkuvmmusrurgxzqjc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnaWhrdXZtbXVzcnVyZ3h6cWpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NzE5MjcsImV4cCI6MjA5NzA0NzkyN30.LdIJRiRlGgf7ijLjkv8Ts2zcKTg5tbwFyLNWgjF0yEc');
 
