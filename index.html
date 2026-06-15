@@ -7,25 +7,27 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <span class="letra-e">E</span><span class="outras-letras">URO DIESEL</span>
-        </div>
-        
-        <input type="text" id="user" placeholder="USUÁRIO">
-        
-        <input type="password" id="pass" placeholder="SENHA" style="width: 100%;">
-
-        <div class="action-row">
-            <div class="checkbox-container">
-                <input type="checkbox" id="lembrar">
-                <label for="lembrar">Lembrar senha</label>
-            </div>
-            <button type="button" id="btnMostrar" onclick="toggleSenha()" class="btn-toggle-text">MOSTRAR</button>
-        </div>
-
-        <button onclick="login()">ENTRAR</button>
-        <a href="inscrever.html">INSCREVA-SE</a>
+    <div class="logo">
+        <span class="letra-e">E</span><span class="outras-letras">URO DIESEL</span>
     </div>
+    
+    <input type="text" id="user" placeholder="USUÁRIO">
+    <input type="password" id="pass" placeholder="SENHA" style="width: 100%;">
+
+    <div class="action-row">
+        <div class="checkbox-container">
+            <input type="checkbox" id="lembrar"><label>Lembrar</label>
+        </div>
+        <button type="button" id="btnMostrar" onclick="toggleSenha()" class="btn-toggle-text">MOSTRAR</button>
+    </div>
+
+    <button onclick="login()">ENTRAR</button>
+
+    <div style="text-align: center; margin-top: 10px;">
+        <a href="recuperar.html" class="link-secundario">ESQUECEU A SENHA?</a>
+        <a href="inscrever.html" class="link-secundario">INSCREVA-SE</a>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/main.js"></script>
