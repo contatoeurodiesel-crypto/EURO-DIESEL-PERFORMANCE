@@ -115,16 +115,26 @@ async function carregarPendentes() {
     });
 }
 
-// Função para aprovar o cadastro
-async function aprovar(id) {
+// Função para o MASTER gerar o Código de Ativação e enviar ao usuário
+async function aprovar(id, nome, telefone) {
+    // 1. Gerar Código de Ativação (Ex: ATIVA-9999)
+    let codigoAtivacao = "ATIVA-" + Math.floor(1000 + Math.random() * 9000);
+
+    // 2. Atualizar o status para APROVADO e salvar o código no banco
     const { error } = await _supabase
         .from('usuarios')
-        .update({ status: 'APROVADO' })
+        .update({ status: 'APROVADO', codigo_ativacao: codigoAtivacao })
         .eq('id', id);
 
-    if (error) alert("Erro ao aprovar");
-    else {
-        alert("USUÁRIO APROVADO!");
-        carregarPendentes(); // Recarrega a lista
+    if (error) {
+        alert("Erro ao aprovar: " + error.message);
+    } else {
+        // 3. Link para enviar o código final ao usuário via WhatsApp
+        let mensagem = `*CADASTRO APROVADO!*%0A%0AOlá ${nome}, seu acesso foi liberado.%0A%0A*Seu código de ativação:* ${codigoAtivacao}%0A%0AInsira este código no aplicativo para iniciar.`;
+        let linkWhatsApp = `https://wa.me/${telefone.replace('+', '')}?text=${mensagem}`;
+
+        window.open(linkWhatsApp, '_blank');
+        alert("CÓDIGO GERADO E WHATSAPP ABERTO!");
+        carregarPendentes();
     }
 }
