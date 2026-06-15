@@ -169,21 +169,26 @@ async function verificarAcessoMaster() {
 async function verificarAtivacao() {
     let codigo = document.getElementById('codigoInput').value.trim().toUpperCase();
 
-    // Busca o usuário que tenha esse código de ativação
+    if (!codigo) {
+        alert("Por favor, digite o código!");
+        return;
+    }
+
+    // Busca o usuário pelo código de ativação
     const { data, error } = await _supabase
         .from('usuarios')
         .select('*')
         .eq('codigo_ativacao', codigo)
-        .eq('status', 'APROVADO')
         .maybeSingle();
 
     if (error) {
-        alert("Erro ao verificar: " + error.message);
+        alert("Erro ao buscar código: " + error.message);
     } else if (!data) {
-        alert("CÓDIGO INVÁLIDO OU NÃO APROVADO!");
+        alert("CÓDIGO INVÁLIDO!");
     } else {
-        alert("ATIVADO COM SUCESSO! Bem-vindo, " + data.nome);
-        // Aqui você pode redirecionar o usuário para a página principal dele
+        // Se achou, o sistema agora sabe que esse usuário está ATIVADO
+        alert("PARABÉNS! " + data.nome + ", sua conta foi ativada.");
+        localStorage.setItem('usuarioLogado', data.usuario);
         window.location.href = "home.html";
     }
 }
