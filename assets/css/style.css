@@ -1,62 +1,75 @@
-/* RESET E PADRÃO */
+/* --- RESET E PADRÃO --- */
 * { text-transform: uppercase; margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-body { background-color: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; }
+body { background-color: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
 
-/* LOGO ESTILIZADO */
-.logo { font-size: 40px; font-weight: bold; margin-bottom: 20px; }
-.e-risco { display: block; width: 20px; height: 5px; background-color: #fff; margin-bottom: -2px; }
-.letra-e { color: #FF0000; }
-.outras-letras { color: #fff; }
+/* --- LOGO PROFISSIONAL (Rigorosamente igual ao modelo enviado) --- */
+.logo { font-size: 32px; font-weight: bold; margin-bottom: 25px; text-align: center; }
+.logo .letra-e { color: #E7272D; } /* Vermelho específico */
+.logo .outras-letras { color: #fff; }
 
-/* INPUTS E BOTÕES */
-input { width: 100%; padding: 12px; margin: 8px 0; background: #111; border: 1px solid #FF0000; color: #fff; }
-button { width: 100%; padding: 12px; background: #FF0000; border: none; color: white; font-weight: bold; cursor: pointer; }
-a { color: #888; font-size: 12px; display: block; margin-top: 10px; text-decoration: none; }
-/* --- ADICIONE ESTE BLOCO NO FINAL DO SEU ARQUIVO --- */
-.password-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-.btn-mostrar { 
-    position: absolute; right: 5px; border: none; background: transparent; 
-    color: #FF0000; cursor: pointer; font-size: 10px; font-weight: bold; 
+/* --- CONTAINER CENTRAL --- */
+.container { width: 280px; display: flex; flex-direction: column; align-items: center; }
+
+/* --- INPUTS E BOTÕES PADRÃO --- */
+input { 
+    width: 100%; 
+    padding: 12px; 
+    margin: 6px 0; 
+    background: #000; /* Preto absoluto */
+    border: 1px solid #E7272D; /* Borda vermelha */
+    color: #fff; 
+    font-size: 13px; 
+    text-transform: uppercase;
 }
-.checkbox-container { display: flex; align-items: center; margin: 10px 0; color: #888; font-size: 11px; }
-.checkbox-container input { width: 15px; margin-right: 8px; border: 1px solid #FF0000; }
-.link-esqueci { color: #888; font-size: 10px; text-decoration: none; margin-top: 5px; display: block; }
-/* --- NOVA ÁREA DE AÇÕES ABAIXO DOS INPUTS --- */
-.container { width: 300px; } /* Mantendo o padrão */
+input::placeholder { color: #666; text-transform: uppercase; }
 
-/* A área de ações (botão mostrar e checkbox) */
+button { 
+    width: 100%; 
+    padding: 12px; 
+    background: #E7272D; /* Vermelho padrão */
+    border: none; 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 13px; 
+    text-transform: uppercase;
+    margin-top: 15px; 
+}
+button:hover { background: #b01b20; } /* Efeito ao passar o mouse */
+
+a { color: #888; font-size: 11px; display: block; margin-top: 12px; text-decoration: none; }
+
+/* --- NOVA ÁREA DE AÇÕES ABAIXO DO INPUT DE SENHA --- */
 .action-row { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     width: 100%; 
-    margin-top: -5px; /* Ajuste fino para colar nos inputs */
-    margin-bottom: 10px;
-}
-
-/* O botão 'MOSTRAR/OCULTAR' (agora fora do input) */
-.btn-toggle-text { 
-    border: 1px solid #FF0000; /* Quadrado com borda vermelha */
-    background: #000; 
-    color: #FF0000; 
-    cursor: pointer; 
-    font-size: 10px; 
-    font-weight: bold; 
-    padding: 3px 8px; /* Pequeno e discreto */
-    text-transform: uppercase;
+    margin-top: 2px;
 }
 
 /* O checkbox 'LEMBRAR SENHA' (o quadrado pequeno) */
-.checkbox-container { 
-    display: flex; 
-    align-items: center; 
-    color: #888; 
-    font-size: 11px; 
-}
+.checkbox-container { display: flex; align-items: center; color: #888; font-size: 11px; }
 .checkbox-container input { 
-    width: 14px !important; /* Forçando o tamanho pequeno */
-    height: 14px !important;
-    margin: 0 6px 0 0; /* Alinhamento perfeito */
-    border: 1px solid #FF0000;
-    cursor: pointer;
+    width: 14px !important; 
+    height: 14px !important; 
+    margin: 0 6px 0 0 !important; 
+    border: 1px solid #E7272D !important; 
+    background: #000 !important;
+    cursor: pointer; 
+    padding: 0 !important;
+}
+
+/* O botão 'MOSTRAR/OCULTAR' quadrado e externo */
+.btn-toggle-text { 
+    border: 1px solid #E7272D; 
+    background: #000; 
+    color: #E7272D; 
+    cursor: pointer; 
+    font-size: 9px; 
+    font-weight: bold; 
+    padding: 2px 7px; 
+    text-transform: uppercase;
+    width: auto !important; /* Não ocupar toda a largura */
+    margin: 0 !important; /* Sem margem */
 }
