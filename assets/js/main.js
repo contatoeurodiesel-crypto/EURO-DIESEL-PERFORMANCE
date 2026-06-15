@@ -48,3 +48,32 @@ async function verificarAcessoMaster() {
     }
     // Opcional: Adicionar verificação se o nível no banco ainda é MASTER
 }
+
+async function carregarPendentes() {
+    const listaDiv = document.getElementById('listaUsuarios');
+    
+    const { data, error } = await _supabase
+        .from('usuarios')
+        .select('*')
+        .eq('status', 'PENDENTE');
+
+    if (error) {
+        listaDiv.innerHTML = "Erro ao carregar: " + error.message;
+        return;
+    }
+
+    if (data.length === 0) {
+        listaDiv.innerHTML = "NENHUM USUÁRIO PENDENTE.";
+        return;
+    }
+
+    let html = "";
+    data.forEach(user => {
+        html += `<div style="border:1px solid #E7272D; padding:10px; margin:5px;">
+                    <p>USUÁRIO: ${user.usuario}</p>
+                    <p>TELEFONE: ${user.telefone || 'NÃO INFORMADO'}</p>
+                    <button onclick="aprovarUsuario('${user.usuario}')">APROVAR</button>
+                 </div>`;
+    });
+    listaDiv.innerHTML = html;
+}
