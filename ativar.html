@@ -2,19 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Ativar Conta - Euro Diesel</title>
+    <title>Ativar Acesso - Euro Diesel</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <div class="container">
-        <h2>ATIVAR MINHA CONTA</h2>
-        <p>Insira o código que você recebeu no WhatsApp para liberar seu acesso.</p>
+        <h2>ATIVAR SEU ACESSO</h2>
+        <p>Cole abaixo o código de ativação que você recebeu:</p>
         
         <input type="text" id="codigoInput" placeholder="XXX-XXX-XXX-XXX" style="text-transform: uppercase;">
-        <button onclick="verificarAtivacao()">VALIDAR CÓDIGO</button>
         
-        <br><br>
-        <a href="index.html">Voltar ao Login</a>
+        <button onclick="verificarAtivacao()">VALIDAR E ENTRAR</button>
+        
+        <div style="margin-top: 15px;">
+            <a href="index.html">Voltar para o Login</a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
