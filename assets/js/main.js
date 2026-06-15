@@ -88,3 +88,43 @@ async function cadastrarComToken() {
         alert("Erro inesperado: " + e.message);
     }
 }
+// Função para carregar usuários pendentes no Painel Master
+async function carregarPendentes() {
+    const { data, error } = await _supabase
+        .from('usuarios')
+        .select('*')
+        .eq('status', 'PENDENTE');
+
+    if (error) {
+        alert("Erro ao buscar: " + error.message);
+        return;
+    }
+
+    let lista = document.getElementById('listaUsuarios');
+    lista.innerHTML = ''; // Limpa a lista
+
+    data.forEach(user => {
+        lista.innerHTML += `
+            <div style="border: 1px solid #E7272D; padding: 10px; margin: 10px 0;">
+                <p>NOME: ${user.nome}</p>
+                <p>TELEFONE: ${user.telefone}</p>
+                <p>TOKEN: ${user.token}</p>
+                <button onclick="aprovar('${user.id}')">APROVAR</button>
+            </div>
+        `;
+    });
+}
+
+// Função para aprovar o cadastro
+async function aprovar(id) {
+    const { error } = await _supabase
+        .from('usuarios')
+        .update({ status: 'APROVADO' })
+        .eq('id', id);
+
+    if (error) alert("Erro ao aprovar");
+    else {
+        alert("USUÁRIO APROVADO!");
+        carregarPendentes(); // Recarrega a lista
+    }
+}
