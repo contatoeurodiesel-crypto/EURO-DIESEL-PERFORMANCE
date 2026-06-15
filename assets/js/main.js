@@ -77,8 +77,10 @@ async function carregarPendentes() {
     let html = "";
     data.forEach(user => {
         html += `<div style="border:1px solid #E7272D; padding:10px; margin:5px;">
+                    <p>NOME: ${user.nome || 'NÃO INFORMADO'}</p>
                     <p>USUÁRIO: ${user.usuario}</p>
                     <p>TELEFONE: ${user.telefone || 'NÃO INFORMADO'}</p>
+                    <p>TOKEN: <b>${user.token || 'SEM TOKEN'}</b></p>
                     <button onclick="aprovarUsuario('${user.usuario}')">APROVAR</button>
                  </div>`;
     });
