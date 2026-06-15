@@ -44,7 +44,47 @@ async function cadastrarComToken() {
         alert("Erro inesperado: " + e.message);
     }
 }
+// Função para alternar visibilidade da senha
+function toggleSenha() {
+    let inputPass = document.getElementById('pass');
+    let btn = document.getElementById('btnMostrar');
+    if (!inputPass) return;
+    if (inputPass.type === 'password') {
+        inputPass.type = 'text';
+        btn.innerText = 'OCULTAR';
+    } else {
+        inputPass.type = 'password';
+        btn.innerText = 'MOSTRAR';
+    }
+}
 
+// Função de segurança básica para proteger a home
+async function verificarStatus() {
+    let user = localStorage.getItem('usuarioLogado');
+    if (!user) {
+        window.location.href = "index.html";
+    }
+}
+
+// Função de login (garanta que esteja completa)
+async function login() {
+    let user = document.getElementById('user').value.trim().toUpperCase();
+    let pass = document.getElementById('pass').value.trim();
+    
+    const { data, error } = await _supabase
+        .from('usuarios')
+        .select('*')
+        .eq('usuario', user)
+        .eq('senha', pass)
+        .maybeSingle();
+
+    if (data && data.status === 'APROVADO') {
+        localStorage.setItem('usuarioLogado', data.usuario);
+        window.location.href = data.nivel === 'MASTER' ? "admin/master.html" : "home.html";
+    } else {
+        alert("LOGIN INVÁLIDO OU CONTA PENDENTE!");
+    }
+}
 // Função de verificação de ativação CORRIGIDA
 async function verificarAtivacao() {
     let codigo = document.getElementById('codigoInput').value.trim().toUpperCase();
