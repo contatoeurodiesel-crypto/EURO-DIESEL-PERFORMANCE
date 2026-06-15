@@ -166,3 +166,54 @@ async function ativarConta() {
         window.location.href = "home.html";
     }
 }
+
+// Função de Busca em Tempo Real (O coração do sistema)
+async function filtrarParametros() {
+    const termo = document.getElementById('search-input').value.trim().toUpperCase();
+    const resultsDiv = document.getElementById('results');
+    
+    // Clean UI: Se vazio, esvazia a tela e encerra
+    if (!termo) {
+        resultsDiv.innerHTML = "";
+        document.getElementById('count-match').innerText = "0";
+        return;
+    }
+
+    // Busca no Supabase (ajuste o nome da tabela conforme seu banco)
+    const { data, error } = await supabase
+        .from('parametros') // Certifique-se que o nome da tabela é esse
+        .select('*')
+        .or(`code.ilike.%${termo}%,instruction.ilike.%${termo}%`);
+
+    if (error) {
+        console.error("Erro na busca:", error);
+        return;
+    }
+
+    // Renderização dos cards
+    resultsDiv.innerHTML = "";
+    data.forEach(item => {
+        resultsDiv.innerHTML += `
+            <div class="card">
+                <span><b>${item.code}</b></span>
+                <span>${item.instruction}</span>
+            </div>
+        `;
+    });
+    
+    document.getElementById('count-match').innerText = data.length;
+}
+
+// Controle de acesso Master (Ocultar/Mostrar painel de gestão)
+async function verificarAcessoMaster() {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    // Supondo que você tenha uma coluna 'role' ou 'is_admin' no Supabase
+    // Isso é só um exemplo, ajuste conforme seu banco de dados
+    if (user && user.user_metadata.role === 'admin') {
+        document.getElementById('master-zone').style.display = 'block';
+    }
+}
+
+// Inicializa a verificação ao carregar a página
+window.onload = verificarAcessoMaster;
