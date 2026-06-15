@@ -130,3 +130,24 @@ async function aprovar(id, nome, telefone) {
         carregarPendentes();
     }
 }
+// Função de Proteção: Verifica se o usuário é MASTER
+async function verificarAcessoMaster() {
+    // Busca o usuário logado (assumindo que você salve o nome dele no localStorage no login)
+    let usuarioLogado = localStorage.getItem('usuarioLogado');
+
+    if (!usuarioLogado) {
+        window.location.href = "../index.html"; // Expulsa se não estiver logado
+        return;
+    }
+
+    const { data, error } = await _supabase
+        .from('usuarios')
+        .select('nivel')
+        .eq('usuario', usuarioLogado)
+        .single();
+
+    if (error || data.nivel !== 'MASTER') {
+        alert("ACESSO NEGADO! Você não é um administrador.");
+        window.location.href = "../index.html";
+    }
+}
