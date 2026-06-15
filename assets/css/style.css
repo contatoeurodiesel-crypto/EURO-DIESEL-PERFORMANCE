@@ -21,3 +21,42 @@ a { color: #888; font-size: 12px; display: block; margin-top: 10px; text-decorat
 .checkbox-container { display: flex; align-items: center; margin: 10px 0; color: #888; font-size: 11px; }
 .checkbox-container input { width: 15px; margin-right: 8px; border: 1px solid #FF0000; }
 .link-esqueci { color: #888; font-size: 10px; text-decoration: none; margin-top: 5px; display: block; }
+/* --- NOVA ÁREA DE AÇÕES ABAIXO DOS INPUTS --- */
+.container { width: 300px; } /* Mantendo o padrão */
+
+/* A área de ações (botão mostrar e checkbox) */
+.action-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+    margin-top: -5px; /* Ajuste fino para colar nos inputs */
+    margin-bottom: 10px;
+}
+
+/* O botão 'MOSTRAR/OCULTAR' (agora fora do input) */
+.btn-toggle-text { 
+    border: 1px solid #FF0000; /* Quadrado com borda vermelha */
+    background: #000; 
+    color: #FF0000; 
+    cursor: pointer; 
+    font-size: 10px; 
+    font-weight: bold; 
+    padding: 3px 8px; /* Pequeno e discreto */
+    text-transform: uppercase;
+}
+
+/* O checkbox 'LEMBRAR SENHA' (o quadrado pequeno) */
+.checkbox-container { 
+    display: flex; 
+    align-items: center; 
+    color: #888; 
+    font-size: 11px; 
+}
+.checkbox-container input { 
+    width: 14px !important; /* Forçando o tamanho pequeno */
+    height: 14px !important;
+    margin: 0 6px 0 0; /* Alinhamento perfeito */
+    border: 1px solid #FF0000;
+    cursor: pointer;
+}
